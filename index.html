@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanguard Build & Design | Premium Construction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #c5a059; /* Brass Gold */
+            --dark: #0f0f0f;
+            --slate: #1e1e1e;
+            --light-grey: #a0a0a0;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--dark); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+
+        /* --- Navigation --- */
+        header {
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+        }
+
+        .logo-container img { height: 45px; width: auto; } /* Replace src with your ibb link */
+        .nav-links { display: flex; list-style: none; align-items: center; }
+        .nav-links li { margin-left: 2.5rem; }
+        .nav-links a { color: var(--white); text-decoration: none; text-transform: uppercase; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; transition: var(--transition); }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cta { background: var(--primary); color: var(--dark) !important; padding: 10px 20px; border-radius: 2px; }
+
+        /* --- Hero --- */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1920') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 10%;
+        }
+
+        #hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 1.5rem; line-height: 1.1; }
+        #hero p { font-size: 1.1rem; color: var(--light-grey); max-width: 700px; margin-bottom: 2.5rem; letter-spacing: 1px; }
+
+        /* --- Stats Bar --- */
+        .stats-bar {
+            background: var(--slate);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            padding: 40px 5%;
+            text-align: center;
+            border-bottom: 1px solid var(--primary);
+        }
+        .stat-item h2 { color: var(--primary); font-size: 2.5rem; }
+        .stat-item p { text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; color: var(--light-grey); }
+
+        /* --- Projects Section --- */
+        #projects { padding: 100px 5%; background: var(--dark); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary); }
+        
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .project-card { position: relative; overflow: hidden; height: 450px; cursor: pointer; }
+        .project-card img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .project-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            transform: translateY(20px); opacity: 0; transition: var(--transition);
+        }
+        .project-card:hover img { transform: scale(1.1); }
+        .project-card:hover .project-overlay { transform: translateY(0); opacity: 1; }
+
+        /* --- Form Section --- */
+        #contact { padding: 100px 5%; background: var(--slate); }
+        .contact-flex { display: flex; flex-wrap: wrap; gap: 50px; max-width: 1200px; margin: 0 auto; }
+        .contact-info { flex: 1; min-width: 300px; }
+        .contact-form-wrapper { flex: 1.5; min-width: 300px; background: var(--dark); padding: 40px; border: 1px solid rgba(197, 160, 89, 0.3); }
+        
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; color: var(--primary); }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 15px; background: transparent; border: 1px solid #333; color: white; border-radius: 0;
+        }
+        .form-group input:focus { border-color: var(--primary); outline: none; }
+        
+        .submit-btn {
+            width: 100%; padding: 20px; background: var(--primary); border: none; font-weight: 700;
+            text-transform: uppercase; cursor: pointer; transition: var(--transition);
+        }
+        .submit-btn:hover { background: #e0b970; letter-spacing: 2px; }
+
+        /* --- Footer --- */
+        footer { padding: 80px 5% 40px; background: var(--dark); border-top: 1px solid #222; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px; }
+        .footer-logo { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.8rem; margin-bottom: 20px; }
+        .gmb-btn { display: inline-block; padding: 12px 25px; border: 1px solid var(--primary); color: var(--primary); text-decoration: none; margin-top: 20px; transition: var(--transition); }
+        .gmb-btn:hover { background: var(--primary); color: var(--dark); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Add JS hamburger for mobile if needed */
+            .project-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <a href="https://ibb.co/nNgmrffc"><img src="https://ibb.co/nNgmrffc" alt="Nandini Logo" onerror="this.src='https://via.placeholder.com/150x50/c5a059/000000?text=VANGUARD'"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#projects">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact" class="nav-cta">Consultation</a></li>
+        </ul>
+    </header>
+
+    <section id="hero">
+        <h1>Crafting Timeless Infrastructure.</h1>
+        <p>From luxury residential estates to state-of-the-art commercial hubs, we build with precision, integrity, and a vision for the future.</p>
+        <a href="#projects" style="color: var(--primary); text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--primary); padding-bottom: 5px;">View Projects</a>
+    </section>
+
+    <div class="stats-bar">
+        <div class="stat-item"><h2>250+</h2><p>Projects Delivered</p></div>
+        <div class="stat-item"><h2>15</h2><p>Industry Awards</p></div>
+        <div class="stat-item"><h2>20+</h2><p>Years Experience</p></div>
+        <div class="stat-item"><h2>100%</h2><p>Safety Record</p></div>
+    </div>
+
+    <section id="projects">
+        <div class="section-header">
+            <h2>Iconic Past Projects</h2>
+            <p>A glimpse into our portfolio of excellence.</p>
+        </div>
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" alt="Villa">
+                <div class="project-overlay">
+                    <h3>The Obsidian Villa</h3>
+                    <p>Residential | Beverly Hills</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" alt="Office">
+                <div class="project-overlay">
+                    <h3>Skyline Commerce Hub</h3>
+                    <p>Commercial | Downtown</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" alt="Estate">
+                <div class="project-overlay">
+                    <h3>Slate & Stone Estates</h3>
+                    <p>Modern Living | Austin, TX</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-flex">
+            <div class="contact-info">
+                <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 20px;">Let's Discuss Your Vision.</h2>
+                <p style="color: var(--light-grey); margin-bottom: 30px;">Whether you're looking to build your dream home or a high-rise office, our experts are ready to lead the way.</p>
+                <p><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> 123 Construction Way, Suite 500</p>
+                <p><i class="fas fa-phone" style="color: var(--primary); margin-top: 15px;"></i> +1 (555) 000-1234</p>
+            </div>
+            <div class="contact-form-wrapper">
+                <form id="lead-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" name="Name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" name="Email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Project Type</label>
+                        <input type="text" name="Message" placeholder="e.g. Residential Villa" required>
+                    </div>
+                    <button type="submit" class="submit-btn" id="subBtn">Submit Request</button>
+                    <div id="msg" style="margin-top: 20px; text-align: center;"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">Nandini Construction</div>
+                <p style="color: var(--light-grey); font-size: 0.9rem;">The standard of premium construction since 2006.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 20px; color: var(--primary);">Navigation</h4>
+                <p><a href="#hero" style="color: #888; text-decoration: none;">Home</a></p>
+                <p><a href="#projects" style="color: #888; text-decoration: none;">Projects</a></p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 20px; color: var(--primary);">Connect</h4>
+                <a href="https://maps.app.goo.gl/qRL5mESXBTUSZtbX9" class="gmb-btn" target="_blank">
+                    <i class="fab fa-google"></i> GMB Profile
+                </a>
+            </div>
+        </div>
+        <div style="text-align: center; font-size: 0.7rem; color: #444; border-top: 1px solid #222; padding-top: 30px;">
+            © 2026 Nandini Construction . ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyHM7EreU6pTuXBPaVVNrEsUzL-2m8glET5Vkrd_W7hvgsrhx9yPNEDinL-9olNc3aTeA/exec';
+        const form = document.getElementById('lead-form');
+        const btn = document.getElementById('subBtn');
+        const msg = document.getElementById('msg');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btn.disabled = true;
+            btn.innerHTML = "Processing...";
+            
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    msg.innerHTML = "Success! We will contact you shortly.";
+                    msg.style.color = "#c5a059";
+                    form.reset();
+                    btn.disabled = false;
+                    btn.innerHTML = "Submit Request";
+                })
+                .catch(error => {
+                    msg.innerHTML = "Error. Please try again.";
+                    msg.style.color = "red";
+                    btn.disabled = false;
+                    btn.innerHTML = "Submit Request";
+                });
+        });
+    </script>
+</body>
+</html>
